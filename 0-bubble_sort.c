@@ -24,13 +24,13 @@ void bubble_sort(int *array, size_t size)
     int has_swapped = 1;
     size_t i, end = size;
 
-    // looping until no swaps are made in a pass
+    /* looping until no swaps are made in a pass */
     while (has_swapped == 1)
     {
         has_swapped = 0;
         for (i = 1; i < end; i++)
         {
-            // If the current element is greater than the next one, swap them
+            /* If the current element is greater than the next one, swap them */
             if (array[i - 1] > array[i])
             {
                 swap_int(&array[i - 1], &array[i]);

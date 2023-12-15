@@ -5,6 +5,7 @@
  * swap_int - Swaps the values of two integers.
  * @a: Pointer to integer a.
  * @b: Pointer to integer b.
+ * Done by: Mekonen Abera & Gebrekidan Alemayehu
  */
 void swap_int(int *a, int *b)
 {
@@ -17,7 +18,6 @@ void swap_int(int *a, int *b)
 
 /**
  * bubble_sort - Sorts an array of integers in ascending order
- *               
  * @array: Pointer to an array of integers.
  * @size: The number of elements in the array.
  */

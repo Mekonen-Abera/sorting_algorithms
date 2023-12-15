@@ -1,12 +1,12 @@
 #include "sort.h"
 
 /**
- * swap - Switches the values of two integers.
+ * swap_ints - Exchanges the values of two integers.
  * @a: Pointer to the first integer.
- * @b: Pointer to the second integer
- * Done by: Mekonen Abera & Gebrekidan Alemayehu
+ * @b: Pointer to the second integer.
+ * Done by: Mekonen & Gebrekidan
  */
-void swap(int *a, int *b)
+void swap_ints(int *a, int *b)
 {
 	int temp;
 
@@ -16,34 +16,34 @@ void swap(int *a, int *b)
 }
 
 /**
- * selection_sort - Sorts an array using the selection-Sort algorithm.
- * @array: Input array to sort.
- * @size: Dimension of the array.
+ * selection_sort - Sorts an array of integers in increasing order
+ * @array: An array of integers.
+ * @size: The size of the array.
+ * By: Mekonen-Abera & Gebrekidan Alemayehu
+ * Description: Prints, the array following a swap in every event.
  */
 void selection_sort(int *array, size_t size)
 {
-	size_t i, j, min_index;
+	int *min;
+	size_t i, j;
 
-	/* Ensure that the array has fewer than two elements */
-	if (size < 2)
+	/* Check if array is NULL or size is less than 2 */
+	if (array == NULL || size < 2)
 		return;
 
 	for (i = 0; i < size - 1; i++)
 	{
-		min_index = i;
+		min = array + i;
 
-		/* Get the min index of the unsorted part */
+		/* Locate the index of the smallest element among the unsorted entries */
 		for (j = i + 1; j < size; j++)
-		{
-			if (array[min_index] > array[j])
-				min_index = j;
-		}
+			min = (array[j] < *min) ? (array + j) : min;
 
-		/* Exchange the discovered minimum element with the first element */
-		if (min_index != i)
+		/* Swap the found minimum value with the first element */
+		if (array + i != min)
 		{
-			swap(&array[min_index], &array[i]);
-			print_array(array, size);
+			swap_ints(array + i, min);
+			putchar(print_array(array, size));
 		}
 	}
 }

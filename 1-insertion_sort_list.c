@@ -17,9 +17,7 @@ void insertion_sort_list(listint_t **list)
 	/* Check if there is more than one element in the list */
 	if ((*list)->next)
 	{
-		/* Initialize the division pointer */
 		div1 = *list;
-		/* Move to the next node */
 		div1 = div1->next;
 
 		/* Iterate through the list starting from the second element */
@@ -27,7 +25,6 @@ void insertion_sort_list(listint_t **list)
 		{
 			/* Save the current node in auxiliary variable */
 			aux = div1;
-			/* Move to the next node */
 			div1 = div1->next;
 
 			/* Move backward and swap nodes until in the correct order */

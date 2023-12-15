@@ -27,18 +27,18 @@ void bubble_sort(int *array, size_t size)
     /* looping until no swaps are made in a pass */
     while (has_swapped == 1)
     {
-        has_swapped = 0;
-        for (i = 1; i < end; i++)
-        {
-            /* If the current element is greater than the next one, swap them */
-            if (array[i - 1] > array[i])
-            {
-                swap_int(&array[i - 1], &array[i]);
-                has_swapped = 1;
-                print_array(array, size);
-            }
-        }
-        end--;
+	    has_swapped = 0;
+	    for (i = 1; i < end; i++)
+	    {
+		    /* If the current element is greater than the next one, swap them */
+		    if (array[i - 1] > array[i])
+		    {
+			    swap_int(&array[i - 1], &array[i]);
+			    has_swapped = 1;
+			    print_array(array, size);
+		    }
+	    }
+	    end--;
     }
 }
 

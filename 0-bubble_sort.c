@@ -4,7 +4,8 @@
  * swap_int - Swaps the values of two integers.
  * @a: Pointer to integer a.
  * @b: Pointer to integer b.
- * Description: Done by Mekonen Abera & Gebrekidan Alemayehu
+ * Done by: Mekonen Abera & Gebrekidan Alemayehu
+ * Discription: Prints the array after each swap
  */
 void swap_int(int *a, int *b)
 {

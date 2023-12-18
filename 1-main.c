@@ -19,16 +19,16 @@ listint_t *create_listint(const int *array, size_t size)
     list = NULL;
     while (size--)
     {
-        node = malloc(sizeof(*node));
-        if (!node)
-            return (NULL);
-        tmp = (int *)&node->n;
-        *tmp = array[size];
-        node->next = list;
-        node->prev = NULL;
-        list = node;
-        if (list->next)
-            list->next->prev = list;
+	    node = malloc(sizeof(*node));
+	    if (!node)
+		    return (NULL);
+	    tmp = (int *)&node->n;
+	    *tmp = array[size];
+	    node->next = list;
+	    node->prev = NULL;
+	    list = node;
+	    if (list->next)
+		    list->next->prev = list;
     }
     return (list);
 }
@@ -46,7 +46,7 @@ int main(void)
 
     list = create_listint(array, n);
     if (!list)
-        return (1);
+	    return (1);
     print_list(list);
     printf("\n");
     insertion_sort_list(&list);

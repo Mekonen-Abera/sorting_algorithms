@@ -1,9 +1,10 @@
 #include "sort.h"
 /**
- * counting_sort - sorts an array of integers in ascending
- * order using the Counting sort algorithm
+ * counting_sort - sorts an array of integers in ascending order
  * @array: pointer to array
  * @size: size of the array
+ * Done by: Mekonen & Gebrekidan
+ * Return: Nothing
  **/
 void counting_sort(int *array, size_t size)
 {
@@ -41,3 +42,4 @@ void counting_sort(int *array, size_t size)
 	free(aux);
 	free(count_array);
 }
+

@@ -24,7 +24,7 @@ void swap_ints(int *a, int *b)
  *
  * Return: The final partition index
  */
-int lomuto_partition(int array[], unsigned int size, int left, int right)
+int lomuto_partition(int array[], unsigned size, int left, int right)
 {
 	int *pivot, above, below;
 

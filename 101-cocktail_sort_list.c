@@ -1,12 +1,12 @@
 #include "sort.h"
-
 /**
- * swap_left_to_right - Swaps nodes from left to right in a doubly linked list.
- * @list: Pointer to the list.
- * @head: Pointer to the head node.
- * @aux: Auxiliary pointer.
+ * swap1 - swaps nodes from left to right
+ * @list: pointer to list
+ * @head: pointer to head node
+ * @aux: auxiliar pointer
+ * Return: no return
  */
-void swap_left_to_right(listint_t **list, listint_t *head, listint_t *aux)
+void swap1(listint_t **list, listint_t *head, listint_t *aux)
 {
 	if (head->prev)
 		head->prev->next = aux;
@@ -19,15 +19,16 @@ void swap_left_to_right(listint_t **list, listint_t *head, listint_t *aux)
 	aux->next = head;
 	head->prev = aux;
 	print_list(*list);
-}
 
+}
 /**
- * swap_right_to_left - Swaps nodes from right to left in a doubly linked list.
- * @list: Pointer to the list.
- * @head: Pointer to the head node.
- * @aux: Auxiliary pointer.
+ * swap2 - swaps nodes from right to left
+ * @list: pointer to list
+ * @head: pointer to head node
+ * @aux: auxiliar pointer
+ * Return: no return
  */
-void swap_right_to_left(listint_t **list, listint_t *head, listint_t *aux)
+void swap2(listint_t **list, listint_t *head, listint_t *aux)
 {
 	aux = head->prev;
 	aux->next->prev = aux->prev;
@@ -44,10 +45,11 @@ void swap_right_to_left(listint_t **list, listint_t *head, listint_t *aux)
 }
 
 /**
- * cocktail_sort_list - Sorts a doubly linked list of integers
- *                      in ascending order using the Cocktail sort algorithm.
- * @list: Pointer to the list head.
- */
+ * cocktail_sort_list - sorts a doubly linked list of integers
+ * in ascending order using the Cocktail sort ailgorithm
+ * @list: pointer to the list head
+ * Return: no return
+ **/
 void cocktail_sort_list(listint_t **list)
 {
 	listint_t *head, *aux;
@@ -59,37 +61,31 @@ void cocktail_sort_list(listint_t **list)
 		while (flag != 0)
 		{
 			flag = 0;
-
-			/* Traverse the list from left to right */
 			while (head->next)
 			{
 				if (head->n > head->next->n)
 				{
 					aux = head->next;
-					swap_left_to_right(list, head, aux);
+					swap1(list, head, aux);
 					flag = 1;
 				}
 				else
 					head = head->next;
 			}
-
-			/* In case there were no swaps, break out of the iteration */
 			if (flag == 0)
 				break;
-
 			flag = 0;
-
-			/* Go through the list starting from its end and move towards its beginning */
 			while (head->prev)
 			{
 				if (head->prev->n > head->n)
 				{
-					swap_right_to_left(list, head, aux);
+					swap2(list, head, aux);
 					flag = 1;
 				}
 				else
 					head = head->prev;
 			}
+
 		}
 	}
 }

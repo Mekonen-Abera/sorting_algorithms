@@ -2,10 +2,10 @@
 #include <stdio.h>
 
 /**
- * printcheck - print a range
- * @array: The array to print
- * @r1: Less range
- * @r2: Final range
+ * printcheck - print a range of elements in the array
+ * @array: The array to be printed
+ * @r1: The index with which the range begins
+ * @r2: The final index of the range
  * Return: Nothing
  */
 void printcheck(int *array, int r1, int r2)
@@ -21,11 +21,11 @@ void printcheck(int *array, int r1, int r2)
 	printf("\n");
 }
 /**
- * _swap - swap two elements in an array
- * @array: THe array to change the values
- * @i: A index
- * @j: Another index
- * @dir: Direction of the array
+ * _swap - Swap two elements of the array according to direction
+ * @array: The array to modify
+ * @i: The first element's index
+ * @j: Second element's index
+ * @dir: The direction of the sorting
  * Return: Nothing
  */
 void _swap(int *array, int i, int j, int dir)
@@ -40,12 +40,12 @@ void _swap(int *array, int i, int j, int dir)
 	}
 }
 /**
- * bitonic_merge - swap the elements to sort
- * @array: Array to sort
- * @low: The low element in the range to sort
- * @size: The size of the range to sort
- * @dir: Indicate which half are manage
- * @r_size: The size of the all array
+ * bitonic_merge - Sort by swapping and merging elements in the array
+ * @array: The array to sort
+ * @low: The low index of the range to be sorted
+ * @size: How large the range to be sorted
+ * @dir: The direction of sorting
+ * @r_size: The total size of the entire array
  * Return: Nothing
  */
 void bitonic_merge(int *array, int low, int size, int dir, const int r_size)
@@ -64,12 +64,12 @@ void bitonic_merge(int *array, int low, int size, int dir, const int r_size)
 	}
 }
 /**
- * _sort - segmentate the array
+ * _sort - Recursively segment and sort the array
  * @array: The array to sort
- * @low: The lowest element in each range
- * @size: Size of the range to sort
- * @dir: Indicate which half are manage
- * @r_size: The size of the all array
+ * @low: The lowest index of each band
+ * @size: Range over which to sort
+ * @dir: The direction of sorting
+ * @r_size: The total extent of the array
  * Return: Nothing
  */
 void _sort(int *array, int low, int size, int dir, const int r_size)
@@ -103,9 +103,9 @@ void _sort(int *array, int low, int size, int dir, const int r_size)
 	}
 }
 /**
- * bitonic_sort - call the sort function
+ * bitonic_sort - Calling the sorting function
  * @array: The array to sort
- * @size: Size of the array
+ * @size: The size of the array
  * Return: Nothing
  */
 void bitonic_sort(int *array, size_t size)

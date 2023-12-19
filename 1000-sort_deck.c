@@ -1,88 +1,131 @@
-#include "sort.h"
-
+#include "deck.h"
 /**
- * _swap - swaps two values in an array
- *
- * @array: data to sort
- * @i: first value
- * @j: second value
- *
- * Return: No Return
- */
-void _swap(int *array, int i, int j)
+ * aux_num_fun - turn into integer card value
+ * @head_tmp1: pointer to the list
+ * Return: integer rep
+ **/
+int aux_num_fun(deck_node_t *head_tmp1)
 {
-	int tmp;
+	int aux_num, j;
+	int num[13] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+	char val[13] = {'A', '2', '3', '4', '5', '6', '7',
+		'8', '9', '1', 'J', 'Q', 'K'};
 
-	tmp = array[i];
-	array[i] = array[j];
-	array[j] = tmp;
-}
-
-/**
- * partition - sorts a partition of data in relation to a pivot
- *
- * @array: data to sort
- * @min: Left wall
- * @max: right wall
- * @size: size of data
- *
- * Return: New Pivot
- */
-int partition(int *array, int min, int max, size_t size)
-{
-	int i, j, pivot = array[max];
-
-	for (i = min, j = max; 1; i++, j--)
+	for (j = 0; j < 13; j++)
 	{
-		while (array[i] < pivot)
-			i++;
+		if (head_tmp1->card->value[0] == val[j])
+			aux_num = num[j];
+	}
 
-		while (array[j] > pivot)
-			j--;
+	return (aux_num);
+}
+/**
+ * num_sort - sorts a doubly linked list of integers, 4 stages
+ * @list: pointer to the list head
+ * Return: no return
+ **/
+void num_sort(deck_node_t **list)
+{
+	deck_node_t *head_tmp1, *head_tmp2, *aux1, *aux2;
+	int flag = 0, i, aux_num1, aux_num2;
+	unsigned int k;
 
-		if (i >= j)
-			return (i);
-		_swap(array, i, j);
-		print_array(array, size);
+	head_tmp1 = *list;
+	head_tmp2 = *list;
+	for (i = 0; i < 4; i++)
+	{ k =  head_tmp1->card->kind;
+		while (head_tmp1->next && head_tmp1->next->card->kind == k)
+		{
+			aux_num1 = aux_num_fun(head_tmp1);
+			aux_num2 = aux_num_fun(head_tmp1->next);
+			flag = 0;
+			head_tmp2 = head_tmp1;
+			while (head_tmp2 && head_tmp2->card->kind == k && aux_num1 > aux_num2)
+			{
+				aux1 = head_tmp2;
+				aux2 = head_tmp2->next;
+				aux1->next = aux2->next;
+				if (aux2->next)
+					aux2->next->prev = aux1;
+				aux2->prev = aux1->prev;
+				aux2->next = aux1;
+				aux1->prev = aux2;
+				if (aux2->prev)
+					aux2->prev->next = aux2;
+				head_tmp2 = aux2->prev;
+				if (!aux2->prev)
+					*list = aux2;
+				flag = 1;
+				if (!head_tmp2)
+					break;
+				aux_num1 = aux_num_fun(head_tmp2);
+				aux_num2 = aux_num_fun(head_tmp2->next);
+			}
+			if (flag == 0)
+				head_tmp1 = head_tmp1->next;
+		}
+		head_tmp1 = head_tmp1->next;
 	}
 }
-
 /**
- * quicksort -  sorts an array of integers in ascending order using the
- * Quick sort algorithm Lomuto partition scheme
- *
- * @array: data to sort
- * @min: Left wall
- * @max: right wall
- * @size: size of data
- *
- * Return: No Return
- */
-void quicksort(int *array, int min, int max, size_t size)
+ * kind_sort - sorts a doubly linked list of integers
+ * in ascending order using the Insertion sort ailgorithm
+ * @list: pointer to the list head
+ * Return: no return
+ **/
+void kind_sort(deck_node_t **list)
 {
-	int p;
+	deck_node_t *head_tmp1, *head_tmp2, *aux1, *aux2;
+	int flag;
 
-	if (min < max)
+	if (list)
 	{
-		p = partition(array, min, max, size);
-		quicksort(array, min, p - 1, size);
-		quicksort(array, p, max, size);
+		head_tmp1 = *list;
+		head_tmp2 = *list;
+		while (list && head_tmp1->next)
+		{
+			if (head_tmp1->next)
+			{
+				flag = 0;
+				head_tmp2 = head_tmp1;
+				while (head_tmp2 && head_tmp2->card->kind > head_tmp2->next->card->kind)
+				{
+					aux1 = head_tmp2;
+					aux2 = head_tmp2->next;
+					aux1->next = aux2->next;
+					if (aux2->next)
+						aux2->next->prev = aux1;
+					if (aux2)
+					{
+						aux2->prev = aux1->prev;
+						aux2->next = aux1;
+					}
+					if (aux1)
+						aux1->prev = aux2;
+					if (aux2->prev)
+						aux2->prev->next = aux2;
+					head_tmp2 = aux2->prev;
+					if (!aux2->prev)
+						*list = aux2;
+					flag = 1;
+				}
+			}
+			if (flag == 0)
+				head_tmp1 = head_tmp1->next;
+		}
 	}
 }
-
 /**
- * quick_sort_hoare -  sorts an array of integers in ascending order using the
- * Quick sort algorithm Hoare partition scheme
+ * sort_deck - sorts a deck of cards
+ * @deck: ponter to the deck
+ * Return: no return
  *
- * @array: data to sort
- * @size: size of data
- *
- * Return: No Return
- */
-void quick_sort_hoare(int *array, size_t size)
+ **/
+void sort_deck(deck_node_t **deck)
 {
-	if (!array || size < 2)
-		return;
-
-	quicksort(array, 0, size - 1, size);
+	if (deck)
+	{
+		kind_sort(deck);
+		num_sort(deck);
+	}
 }

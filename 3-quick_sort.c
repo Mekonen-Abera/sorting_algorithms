@@ -19,10 +19,10 @@ void swap_ints(int *a, int *b)
  * lomuto_partition - Order a subset of an integer array using Lomuto partition
  * @array: The array of integers.
  * @size: The size of the array.
- * @left: The index with which the subset is being ordered.
- * @right: The offset end of the subset to sort.
+ * @left: The index with which the subset is being ordered
+ * @right: The offset end of the subset to sort
  *
- * Return: The final partition index.
+ * Return: The final partition index
  */
 int lomuto_partition(int array[], unsigned int size, int left, int right)
 {
@@ -53,7 +53,7 @@ int lomuto_partition(int array[], unsigned int size, int left, int right)
 }
 
 /**
- * Lomuto_sort - Implementing an algorithm using recursion, Lomuto’s sort
+ * lomuto_sort - Implementing an algorithm using recursion, Lomuto’s sort
  * @array: The array of integers that need to be sorted.
  * @size: The size of the array.
  * @left_boundary: The order of the index starts with arrpartition
@@ -61,24 +61,24 @@ int lomuto_partition(int array[], unsigned int size, int left, int right)
  *
  * Description: Uses the Lomuto partition scheme
  */
-void Lomuto_sort(int array[], unsigned long size, int left_boundary, int end_boundary)
+void lomuto_sort(int array[], unsigned long size, int left_boundary, int end_boundary)
 {
 	int part;
 
 	if (end_boundary - left_boundary > 0)
 	{
 		part = lomuto_partition(array, size, left_boundary, end_boundary);
-		Lomuto_sort(array, size, left_boundary, part - 1);
-		Lomuto_sort(array, size, part + 1, end_boundary);
+		lomuto_sort(array, size, left_boundary, part - 1);
+		lomuto_sort(array, size, part + 1, end_boundary);
 	}
 }
 
 /**
  * quick_sort - Sort an array of integers in ascending order
- * @array: An array of integers.
- * @size: The size of the array.
+ * @array: An array of integers
+ * @size: The size of the array
  *
- * Description: Uses the Lomuto partition scheme. Prints
+ * Description: Uses the Lomuto partition scheme
  */
 void quick_sort(int *array, size_t size)
 {
@@ -86,6 +86,6 @@ void quick_sort(int *array, size_t size)
 	if (array == NULL || size < 2)
 		return;
 
-	Lomuto_sort(array, size, 0, size - 1);
+	lomuto_sort(array, size, 0, size - 1);
 }
 

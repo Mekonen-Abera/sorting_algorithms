@@ -1,10 +1,11 @@
 #include "sort.h"
 /**
- * swap1 - swaps nodes from left to right
+ * swap1 - swaps nodes from left to right in a doubly linked list
  * @list: pointer to list
  * @head: pointer to head node
  * @aux: auxiliar pointer
- * Return: no return
+ * Done by: Mekonen & Gebrekidan
+ * Return: Nothing
  */
 void swap1(listint_t **list, listint_t *head, listint_t *aux)
 {
@@ -22,11 +23,12 @@ void swap1(listint_t **list, listint_t *head, listint_t *aux)
 
 }
 /**
- * swap2 - swaps nodes from right to left
+ * swap2 - swaps nodes from right to left in a doubly linked list
  * @list: pointer to list
  * @head: pointer to head node
  * @aux: auxiliar pointer
- * Return: no return
+ * Done by: Mekonen & Gebrekidan
+ * Return: Nothing
  */
 void swap2(listint_t **list, listint_t *head, listint_t *aux)
 {
@@ -48,7 +50,7 @@ void swap2(listint_t **list, listint_t *head, listint_t *aux)
  * cocktail_sort_list - sorts a doubly linked list of integers
  * in ascending order using the Cocktail sort ailgorithm
  * @list: pointer to the list head
- * Return: no return
+ * Return: Nothing
  **/
 void cocktail_sort_list(listint_t **list)
 {
@@ -89,3 +91,4 @@ void cocktail_sort_list(listint_t **list)
 		}
 	}
 }
+

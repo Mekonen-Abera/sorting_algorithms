@@ -4,33 +4,36 @@
 
 /**
  * swap_int - swaps the values of two integers
- * @a: integer a
- * @b: integer b
+ * @a: The first integer a
+ * @b: The second integer b
+ * Done by: Mekonen & Gebrekidan
+ * Return: Nothing
  */
 void swap_int(int *a, int *b)
 {
-	int a1;
+	int tmp;
 
-	a1 = *a;
+	tmp = *a;
 
 	*a = *b;
-	*b = a1;
+	*b = tmp;
 }
 
 /**
  * bubble_sort - sorts an array of integers in ascending order
- * @array: pointer to an array of integers
- * @size: the number of elements in the array
+ * @array: Pointer to an array of integers
+ * @size: The number of elements in the array
+ * Return: Nothing
  */
 void bubble_sort(int *array, size_t size)
 {
 	int swapped = 1;
-	size_t i, x = size;
+	size_t i, len = size;
 
 	while (swapped == 1)
 	{
 		swapped = 0;
-		for (i = 1; i < x; i++)
+		for (i = 1; i < len; i++)
 		{
 			if (array[i - 1] > array[i])
 			{
@@ -39,7 +42,8 @@ void bubble_sort(int *array, size_t size)
 				print_array(array, size);
 			}
 		}
-		x--;
+		len--;
 	}
 
 }
+

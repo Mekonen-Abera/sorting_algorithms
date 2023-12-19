@@ -5,6 +5,7 @@
  * @list: Pointer to the list.
  * @head: Pointer to the head node.
  * @aux: Auxiliary pointer.
+ * Done by: Mekonen & Gebrekidan
  */
 void swap_left_to_right(listint_t **list, listint_t *head, listint_t *aux)
 {
@@ -56,7 +57,7 @@ void swap_right_to_left(listint_t **list, listint_t *head, listint_t *aux)
 
 /**
  * cocktail_sort_list - Sorts a doubly linked list of integers
- *                      in ascending order by the Cocktail sort algorithm.
+ * in ascending order using the Cocktail sort algorithm.
  * @list: Pointer to the list head.
  */
 void cocktail_sort_list(listint_t **list)
@@ -71,7 +72,7 @@ void cocktail_sort_list(listint_t **list)
 		{
 			flag = 0;
 
-			/* Traverse the list from left to right. */
+			/* Traverse the list from left to right */
 			while (head->next)
 			{
 				if (head->n > head->next->n)
@@ -84,13 +85,13 @@ void cocktail_sort_list(listint_t **list)
 					head = head->next;
 			}
 
-			/* In case there were no swaps, break out of the iteration. */
+			/* In case there were no swaps, break out of the iteration */
 			if (flag == 0)
 				break;
 
 			flag = 0;
 
-			/* Go through the list starting from its end and move towards its beginning. */
+			/* Go through the list starting from its end and move towards its beginning */
 			while (head->prev)
 			{
 				if (head->prev->n > head->n)
@@ -104,3 +105,4 @@ void cocktail_sort_list(listint_t **list)
 		}
 	}
 }
+

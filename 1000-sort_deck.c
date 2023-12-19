@@ -1,143 +1,88 @@
-#include "deck.h"
+#include "sort.h"
 
 /**
- * aux_num_from_card - Converts card value to an integer.
- * @card_node: Pointer to the card node.
- * Done by: Mekonen & Gebrekidan
- * Return: Integer representation of the card value.
- **/
-int aux_num_from_card(deck_node_t *card_node)
+ * _swap - swaps two values in an array
+ *
+ * @array: data to sort
+ * @i: first value
+ * @j: second value
+ *
+ * Return: No Return
+ */
+void _swap(int *array, int i, int j)
 {
-    int card_value, j;
-    int values[13] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
-    char value_symbols[13] = {'A', '2', '3', '4', '5', '6', '7', '8', '9', '1', 'J', 'Q', 'K'};
+	int tmp;
 
-    /* Map card value to its corresponding integer */
-    for (j = 0; j < 13; j++)
-    {
-	    if (card_node->card->value[0] == value_symbols[j])
-			    card_value = values[j];
-    }
-    return (card_value);
+	tmp = array[i];
+	array[i] = array[j];
+	array[j] = tmp;
 }
 
 /**
- * num_sort - Sorts a doubly linked list of integers in 4 stages.
- * @list: Pointer to the list head.
+ * partition - sorts a partition of data in relation to a pivot
  *
- * Return: Nothing
- **/
-void num_sort(deck_node_t **list)
-{
-    deck_node_t *current_node, *temp_node1, *temp_node2, *aux1, *aux2;
-    int flag = 0, i, aux_value1, aux_value2;
-    unsigned int kind_value;
-
-    current_node = *list;
-    temp_node1 = *list;
-    current_node = temp_node1;
-
-    for (i = 0; i < 4; i++)
-    {
-	    kind_value = current_node->card->kind;
-	    while (current_node->next && current_node->next->card->kind == kind_value)
-	    {
-		    aux_value1 = aux_num_from_card(current_node);
-		    aux_value2 = aux_num_from_card(current_node->next);
-		    flag = 0;
-		    temp_node2 = current_node;
-		    while (temp_node2 && temp_node2->card->kind == kind_value && aux_value1 > aux_value2)
-		    {
-			    aux1 = temp_node2;
-			    aux2 = temp_node2->next;
-			    /* Swap nodes if needed */
-			    aux1->next = aux2->next;
-			    if (aux2->next)
-				    aux2->next->prev = aux1;
-			    aux2->prev = aux1->prev;
-			    aux2->next = aux1;
-			    aux1->prev = aux2;
-			    if (aux2->prev)
-				    aux2->prev->next = aux2;
-			    temp_node2 = aux2->prev;
-			    if (!aux2->prev)
-				    *list = aux2;
-			    flag = 1;
-			    if (!temp_node2)
-				    break;
-			    aux_value1 = aux_num_from_card(temp_node2);
-			    aux_value2 = aux_num_from_card(temp_node2->next);
-		    }
-		    if (flag == 0)
-			    current_node = current_node->next;
-	    }
-	    current_node = current_node->next;
-    }
-}
-
-/**
- * kind_sort - Insertion sort a doubly linked list of integers
- * @list: Pointer to the list head
+ * @array: data to sort
+ * @min: Left wall
+ * @max: right wall
+ * @size: size of data
  *
- * Return: Nothing
- **/
-void kind_sort(deck_node_t **list)
+ * Return: New Pivot
+ */
+int partition(int *array, int min, int max, size_t size)
 {
-    deck_node_t *current_node, *temp_node1, *temp_node2, *aux1, *aux2;
-    int flag;
+	int i, j, pivot = array[max];
 
-    if (list)
-    {
-	    current_node = *list;
-	    temp_node1 = *list;
-	    current_node = temp_node1;
-	    while (current_node->next)
-	    {
-		    if (current_node->next)
-		    {
-			    flag = 0;
-			    temp_node2 = current_node;
-			    while (temp_node2 && temp_node2->card->kind > temp_node2->next->card->kind)
-			    {
-				    aux1 = temp_node2;
-				    aux2 = temp_node2->next;
-				    /* Swap nodes if needed */
-				    aux1->next = aux2->next;
-				    if (aux2->next)
-					    aux2->next->prev = aux1;
-				    if (aux2)
-				    {
-					    aux2->prev = aux1->prev;
-					    aux2->next = aux1;
-				    }
-				    if (aux1)
-					    aux1->prev = aux2;
-				    if (aux2->prev)
-					    aux2->prev->next = aux2;
-				    temp_node2 = aux2->prev;
-				    if (!aux2->prev)
-					    *list = aux2;
-				    flag = 1;
-			    }
-		    }
-		    if (flag == 0)
-			    current_node = current_node->next;
-	    }
-    }
-}
-
-/**
- * sort_deck - Sorts a deck of cards.
- * @deck: Pointer to the deck.
- *
- * Return: Nothing
- **/
-void sort_deck(deck_node_t **deck)
-{
-	if (deck)
+	for (i = min, j = max; 1; i++, j--)
 	{
-		kind_sort(deck);
-		num_sort(deck);
+		while (array[i] < pivot)
+			i++;
+
+		while (array[j] > pivot)
+			j--;
+
+		if (i >= j)
+			return (i);
+		_swap(array, i, j);
+		print_array(array, size);
 	}
 }
 
+/**
+ * quicksort -  sorts an array of integers in ascending order using the
+ * Quick sort algorithm Lomuto partition scheme
+ *
+ * @array: data to sort
+ * @min: Left wall
+ * @max: right wall
+ * @size: size of data
+ *
+ * Return: No Return
+ */
+void quicksort(int *array, int min, int max, size_t size)
+{
+	int p;
+
+	if (min < max)
+	{
+		p = partition(array, min, max, size);
+		quicksort(array, min, p - 1, size);
+		quicksort(array, p, max, size);
+	}
+}
+
+/**
+ * quick_sort_hoare -  sorts an array of integers in ascending order using the
+ * Quick sort algorithm Hoare partition scheme
+ *
+ * @array: data to sort
+ * @size: size of data
+ *
+ * Return: No Return
+ */
+void quick_sort_hoare(int *array, size_t size)
+{
+	if (!array || size < 2)
+		return;
+
+	quicksort(array, 0, size - 1, size);
+}
